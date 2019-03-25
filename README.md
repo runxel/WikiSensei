@@ -3,7 +3,7 @@ UserCSS for styling WikiPedia so it's finally readable and neat looking.
 
 ## Preview
 
-![preview](images/preview.png)
+![preview](preview.png)
 
 
 ## Install
