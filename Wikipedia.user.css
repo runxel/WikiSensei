@@ -66,10 +66,12 @@
 	/* Highlight selection. */
 	::selection {
 		color: var(--bgcol) !important;
-		background-color: var(--sel) !important; }
+		background-color: var(--sel) !important;
+		text-shadow: none !important; }
 	::-moz-selection {
 		color: var(--bgcol) !important;
-		background-color: var(--sel) !important; }
+		background-color: var(--sel) !important;
+		text-shadow: none !important; }
 	/* >>> END general */
 
 	/* top nav */
@@ -292,7 +294,6 @@
 	}
 
 	/* numbering of the headings */
-	/* via http://userstyles.org/styles/56739/wikipedia-readable-hyphenation */
 	body {
 		counter-reset: headingOne;
 	}
@@ -308,6 +309,9 @@
 	#bodyContent h6:before {
 		padding-right: 9px;
 		text-shadow: none !important;
+	}
+	#bodyContent h2:first-child {
+		counter-reset: headingOne;
 	}
 	#bodyContent h2 {
 		counter-reset: headingTwo;
