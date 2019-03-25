@@ -1,0 +1,662 @@
+/* ==UserStyle==
+@name         WikiSensei
+@description  A theme for Wikipedia for better reading experience.
+@namespace    github.com/runxel/WikiSensei
+@homepageURL  https://github.com/runxel/WikiSensei
+@supportURL   https://github.com/runxel/WikiSensei/issues
+@updateURL    https://raw.githubusercontent.com/runxel/WikiSensei/master/Wikipedia.user.css
+@version      1.0.0
+@author       runxel
+@license      CC BY-NC-SA
+@preprocessor uso
+
+@var color      bgcol       "Background" 	#f1f4f5
+@var color 		accdark		"Accent dark" 	#323234
+@var color      links       "Links" 		#1d6a5b
+@var color      vislinks    "Visited links" #52196a 
+@var color 		leftnav		"Left nav background color"  #E8E6E2
+@var color 		tocnav		"Toc background color"  #323234
+@var color      sel       	"Selection color" 		#273c75
+@var color      usred       "Red" 			#dd3b4f
+@advanced dropdown 	hideEdit 	"Hide 'Edit' links" {
+	disable "Disable" <<<EOT
+	/* Disabled. *\/
+	EOT;
+	enable "Enable" <<<EOT
+	/* Enabled. *\/
+		display: none; EOT;
+}
+@var text       customRules "Custom CSS rules" #test::after { content: "paste all your custom css here!" !important; }
+==/UserStyle== */
+
+/* Based on https://userstyles.org/styles/99515/wikipedia-1911-rotane */
+
+@-moz-document domain("wikipedia.org") {
+	:root {
+		--links: /*[[links]]*/;
+		--vislinks: /*[[vislinks]]*/;
+		--red: /*[[usred]]*/;
+		--bgcol: /*[[bgcol]]*/;
+		--accdark: /*[[accdark]]*/;
+		--leftnav: /*[[leftnav]]*/;
+		--tocnav: /*[[tocnav]]*/;
+		--sel: /*[[sel]]*/;
+		--contw: 920px;
+	}
+	body {
+		border: none !important;
+		font-family: 'IBM Plex Sans', sans-serif;
+		font-size: 18px !important;
+		background-color: var(--bgcol) !important;
+	}
+	#content {
+		margin: 0 auto !important;
+		border: none !important;
+		font-size: 16px !important;
+		line-height: 80% !important;
+		max-width: var(--contw) ;
+		background-color: var(--bgcol) !important;
+	}
+	a {
+		text-decoration: none !important;
+	}
+	a:hover {
+		text-decoration: underline !important;
+	}
+	/* Highlight selection. */
+	::selection {
+		color: var(--bgcol) !important;
+		background-color: var(--sel) !important; }
+	::-moz-selection {
+		color: var(--bgcol) !important;
+		background-color: var(--sel) !important; }
+	/* >>> END general */
+
+	/* top nav */
+	#mw-page-base {
+		height: 90px;
+		margin: 0 auto;
+		background: var(--accdark);
+	}
+	#mw-navigation {
+		position: absolute !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+	}
+	#mw-head {
+		position: relative !important;
+		max-width: var(--contw);
+		height: 90px !important;
+		margin: 0 auto !important;
+	}
+	#mw-head a,
+	#mw-head ul,
+	#mw-head li,
+	#mw-head span,
+	#mw-head .vectorTabs {
+		background: none !important;
+		border: none !important;
+	}
+	#mw-head > * {
+		position: absolute !important;
+		font-size: 16px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	#mw-head #left-navigation {
+		top: 50px !important;
+		left: 29px !important;
+		padding: 0 !important;
+	}
+	#mw-head #right-navigation {
+		float: right;
+		top: 50px !important;
+		right: 0 !important;
+		padding: 0 !important;
+	}
+	#mw-head #p-personal {
+		top: 0px;
+		right: 0;
+		padding-top: 5px;
+		font-size: 14px;
+	}
+	#mw-head li {
+		opacity: 0;
+		transition: all 0.45s ease-out;
+	}
+	#mw-head:hover li {
+		opacity: 1;
+		transition: all 0.13s ease-in;
+	}
+	#p-views li:last-child a {
+		padding-right: 0;
+	}
+	#mw-head a,
+	#mw-head a:visited {
+		color: #f1f4f5;
+	}
+	#mw-head #searchform > div {
+		position: absolute;
+		z-index: 8000;
+		top: -32px;
+		right: 0px;
+		margin-top: 13px;
+		margin-left: 15px;
+		border: none;
+		background: #E8E6E2;
+		width: 345px;
+		padding: 0 0 7px;
+	}
+	#mw-head #searchform > div input#searchInput {
+		padding: 8px 0 6px 8px !important;
+	}
+	#mw-head #p-cactions,
+	#mw-head #ca-watch {
+		display: none !important;
+	}
+
+	/* logo | Wikipedia */
+	#mw-head:before { /* text */
+		position: relative;	
+		width: 120px;
+		height: 120px;
+		top: 30px;
+		left: 38px;
+		content: 'Wikipedia';
+		font-family: 'Vollkorn', serif;
+		font-weight: normal;
+		font-size: 28px;
+		text-transform: uppercase;
+		letter-spacing: 0px;
+		color: #f1f4f5;
+	}
+	#mw-head:after { /* actual Logo as svg */
+		content: "";
+		position: relative;	
+		width: 30px;
+		height: 30px;
+		top: -7px;
+		left: 0;
+		background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg);
+		background-repeat: no-repeat;
+		background-size: 30px 30px;
+		display: block;
+	}
+
+	/* left nav */
+	#mw-navigation #mw-panel {
+		position: fixed;
+		font-size: 18px;
+		top: 0px;
+		left: -255px;
+		width: 160px;
+		height: 100%;
+		overflow-y: auto;
+		padding: 0 0 0 100px;
+		background: var(--leftnav);
+		box-shadow: 1px 0 3px rgba(0, 0, 0, 0.25);
+		transition: all 0.66s ease-in-out;
+		opacity: 0;
+		scrollbar-width: thin;
+    	scrollbar-color: var(--accdark) var(--leftnav);
+	}
+	#mw-navigation #mw-panel:hover {
+		left: -100px;
+		transition: all 0.2s ease-in-out !important;
+		opacity: 1 !important;
+	}
+	#mw-navigation #mw-panel a {
+		color: #445 !important;
+	}
+	#mw-navigation #p-navigation,
+	#mw-navigation .first {
+		margin-bottom: 0 !important;
+		margin-top: 7px !important;
+	}
+	#mw-navigation #p-lang:before {
+		content: "" !important;
+		font-size: 0 !important;
+		display: inline-block !important;
+		height: 0px !important;
+		width: 100% !important;
+		border-top: 1px solid rgba(0, 0, 0, 0.2) !important;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
+	}
+	#mw-navigation #p-lang {
+		margin-top: -15px !important;
+	}
+	#mw-navigation #p-lang .uls-settings-trigger {
+		margin-right: 8px !important;
+		margin-top: 6px !important;
+	}
+	#mw-navigation > #mw-panel > div:not(#p-lang):not(#p-navigation):not(.first),
+	#mw-navigation #p-lang .wbc-editpage {
+		display: none !important;
+	}
+
+
+	/* article */
+	.mw-indicators {
+		padding-top: 35px;
+	}
+	/* headlines */
+	#firstHeading {
+		font-size: 2.2em;
+		margin-top: 18px;
+		padding-bottom: 7px;
+		font-weight: normal;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+		color: var(--accdark);
+	}
+	#bodyContent h1,
+	#bodyContent h2,
+	#bodyContent h3,
+	#bodyContent h4,
+	#bodyContent h5,
+	#bodyContent h6 {
+		margin-top: 40px;
+		margin-bottom: 25px;
+		font-weight: normal;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+		color: var(--accdark);
+	}
+	#bodyContent h1 span.mw-editsection,
+	#bodyContent h2 span.mw-editsection,
+	#bodyContent h3 span.mw-editsection,
+	#bodyContent h4 span.mw-editsection,
+	#bodyContent h5 span.mw-editsection,
+	#bodyContent h6 span.mw-editsection {
+		float: right !important;
+		margin-top: 12px !important;
+		text-shadow: none !important;
+		/*[[hideEdit]]*/
+	}
+	span.mw-editsection span.mw-editsection-bracket {
+		display: none !important;
+	}
+	#bodyContent h2 {
+		font-size: 33px;
+	}
+	#bodyContent h3 {
+		font-size: 30px;
+	}
+	#bodyContent h4 {
+		font-size: 26px;
+	}
+	#bodyContent h5 {
+		font-size: 22px;
+	}
+	#bodyContent h6 {
+		font-size: 20px;
+	}
+
+	/* numbering of the headings */
+	/* via http://userstyles.org/styles/56739/wikipedia-readable-hyphenation */
+	body {
+		counter-reset: headingOne;
+	}
+	#toctitle h2:before {
+		content: "" !important;
+		counter-reset: headingOne;
+		padding-right: 0 !important;
+	}
+	#bodyContent h2:before,
+	#bodyContent h3:before,
+	#bodyContent h4:before,
+	#bodyContent h5:before,
+	#bodyContent h6:before {
+		padding-right: 9px;
+		text-shadow: none !important;
+	}
+	#bodyContent h2 {
+		counter-reset: headingTwo;
+	}
+	#bodyContent h2:before {
+		counter-increment: headingOne;
+		content: counter(headingOne);
+		font-size: 16px !important;
+	}
+	#bodyContent h3 {
+		counter-reset: headingThree;
+	}
+	#bodyContent h3:before {
+		counter-increment: headingTwo;
+		content: counter(headingOne) "." counter(headingTwo);
+		font-size: 15px !important;
+	}
+	#bodyContent h4 {
+		counter-reset: headingFour;
+	}
+	#bodyContent h4:before {
+		counter-increment: headingThree;
+		content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree);
+		font-size: 14px !important;
+	}
+	#bodyContent h5 {
+		counter-reset: headingFive;
+	}
+	#bodyContent h5:before {
+		counter-increment: headingFour;
+		content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "." counter(headingFour);
+		font-size: 13px !important;
+	}
+	#bodyContent h6 {
+		counter-reset: headingSix;
+	}
+	#bodyContent h6:before {
+		counter-increment: headingFive;
+		content: counter(headingOne) "." counter(headingTwo) "." counter(headingThree) "." counter(headingFour) "." counter(headingFive);
+		font-size: 12px !important;
+	}
+
+	/* article */
+	#bodyContent .infobox {
+		padding: 9px 16px 5px !important;
+		margin-left: 30px !important;
+	}
+	#bodyContent #siteSub, /* hide Wikipedia byline */
+	#bodyContent #mw-fr-revisiontag, /* hide revision thingie */
+	#bodyContent #tfd.boilerplate /* hide template considered for deletion */
+	{
+		display: none !important;
+	}
+	#bodyContent #coordinates {
+		top: -3px !important;
+		padding: 4px 6px 3px !important;
+		background: #E8E6E2 !important;
+		border-radius: 0px !important;
+		border: 1px solid #aaa !important;
+		/* box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 1px rgba(0,0,0,0.25) !important; */
+	}
+	html[lang="de"] #bodyContent #coordinates
+	/* .de fix */
+	{
+		top: 53px !important;
+		right: 32px !important;
+	}
+	#bodyContent #protected-icon,
+	#bodyContent #good-star,
+	#bodyContent #spoken-icon,
+	#bodyContent #featured-star {
+		top: -45px !important;
+	}
+
+	/* text styles */
+	#bodyContent {
+		letter-spacing: -0.1px !important;
+	}
+	#bodyContent p,
+	#bodyContent li,
+	#bodyContent div.hatnote {
+		font-size: 16px !important;
+		line-height: 26px !important;
+		/*font-family: 'Lora' !important;*/
+		letter-spacing: -0.3px !important;
+	}
+	#bodyContent a:not(.new) {
+		color: var(--links) !important;
+	}
+	#bodyContent a:not(.new):visited {
+		color: var(--vislinks) !important;
+	}
+	#bodyContent .dablink,
+	#bodyContent .relarticle,
+	#bodyContent .rellink {
+		margin: 7px 0 9px !important;
+		padding: 0 !important;
+		font-size: 14px !important;
+		line-height: 22px !important;
+		color: #333 !important;
+	}
+	#bodyContent #contentSub
+	/* redirected from msg */
+	{
+		margin: 5px 0 12px -5px !important;
+		padding: 0 !important;
+		font-size: 12px !important;
+	}
+	#bodyContent table.ambox,
+	#bodyContent #disambigbox {
+		margin: 0 !important;
+		font-size: 14px !important;
+		line-height: 22px !important;
+	}
+	#bodyContent #disambigbox {
+		margin: 25px 0 !important;
+	}
+	#bodyContent .references li {
+		color: #111 !important;
+		font-size: 10px !important;
+		line-height: 17px !important;
+	}
+
+	/* boxes */
+	.messagebox,
+	#catlinks,
+	.infobox,
+	.infobox td,
+	table.infobox th,
+	#bodyContent div.thumb,
+	/* fix the thumbs backgrounds!!! */
+
+	.thumbinner,
+	div.thumb div,
+	code,
+	pre,
+	.thumbcaption,
+	.toccolours,
+	.NavFrame,
+	.toccolours th,
+	.toccolours tbody,
+	.NavHead,
+	.tright,
+	.tleft,
+	table,
+	.gallery,
+	.gallerybox,
+	.gallerytext,
+	table.gallery,
+	table.gallery td,
+	.mw-warning,
+	div.townBox,
+	table.diff,
+	td.diff-otitle,
+	td.diff-ntitle,
+	#imageLicense,
+	#filetoc,
+	.hintergrundfarbe1,
+	.hintergrundfarbe2,
+	#hauptseite h2,
+	.MainPageBG,
+	.noarticletext,
+	.quotebox,
+	.mw-code {
+		background-color: #E0DEDA !important;
+	}
+	#content .thumbinner {
+		border-color: #b9b9b9 !important;
+	}
+
+	/* noborder test */
+	#toc,
+	.thumbinner,
+	.thumbinner .thumbimage,
+	.infobox,
+	.vertical-navbox,
+	.mergedtoprow,
+	table.infobox > tbody:first-child > tr:first-child > th,
+	.metadata:not(.ambox),
+	.mbox-small,
+	.quotebox,
+	.portal,
+	.catlinks,
+	.navbox,
+	.hintergrundfarbe1,
+	table
+	/* check this! i added this for "roma" on italian wikipedia */
+	{
+		border: none !important;
+	}
+	#content .thumbinner {
+		padding: 7px !important;
+	}
+	#bodyContent .ambox {
+		border-width: 0 0 0 5px !important;
+	}
+	.navbox + .navbox {
+		margin-top: 9px !important;
+	}
+
+	/* table of contents */
+	#toc {
+		padding: 1px 16px 5px !important;
+		font-size: 12px !important;
+	}
+	#toc #toctitle {
+		margin-top: 7px !important;
+		text-align: left !important;
+		padding-bottom: 0 !important;
+	}
+	#toc .toctitle {
+		padding: 14px 0 6px 0;
+	}
+	#toc .toctitle h2 {
+		font-size: 15px;
+		color: #fff !important;
+	}
+	#toc .toctitle h2:before {
+		content: "" !important;
+	}
+	#toc .toctoggle {
+		display: none;
+	}
+	#toc .toctogglespan {
+		display: none;
+	}
+	#toc.toc {
+		padding: 0;
+		font-size: 12px;
+		display: block;
+		position: fixed;
+		bottom: 0;
+		height: 100%;
+		right: -200px;
+		width: 25vw;
+		min-width: 300px;
+		border: none;
+		transition: all 0.66s ease-in-out;
+		opacity: 0;
+		overflow-y: auto;
+		z-index: 9999;
+		background: var(--tocnav);
+		box-shadow: 10px 0 6px 12px rgba(0, 0, 0, 0.3);
+		scrollbar-width: thin;
+    	scrollbar-color: #f1f4f5 var(--tocnav);
+	}
+	#toc:hover {
+		right: 0px;
+		transition: all 0.15s ease-in-out;
+		opacity: 1;
+	}
+	#bodyContent #toc ul,
+	#bodyContent #toc li {
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	#bodyContent #toc > ul > li {
+		border-top: 1px solid #797776 !important;
+		border-bottom: 1px solid #535251 !important;
+	}
+	#bodyContent #toc > ul > li:first-child {
+		border-top: none !important;
+	}
+	#bodyContent #toc > ul > li:last-child {
+		border-bottom: none !important;
+	}
+	#bodyContent #toc ul li a {
+		font-size: 18px !important;
+		line-height: 21px !important;
+		color: #EAE9E8 !important;
+		padding: 6px 0 4px !important;
+	}
+	#bodyContent #toc ul ul li a {
+		font-size: 13px !important;
+		line-height: 17px !important;
+		color: #D0CFCE !important;
+		padding: 4px 0 !important;
+	}
+	#bodyContent #toc ul li a .tocnumber {
+		font-size: 15px !important;
+		color: #bbb !important;
+		margin-right: 0 !important;
+	}
+	#bodyContent #toc ul li a .tocnumber:after {
+		content: "." !important;
+	}
+	#bodyContent #toc ul ul li a .tocnumber {
+		display: none !important;
+	}
+	#bodyContent #toc ul > li {
+		padding: 0 3px 0 0 !important;
+	}
+	#bodyContent #toc ul ul ul > li {
+		padding: 0 3px 0 10px !important;
+	}
+	#bodyContent #toc > ul > li {
+		padding: 3px 3px 3px 13px !important;
+	}
+	#bodyContent #toc li a[href="#See_also"],
+	#bodyContent #toc li a[href="#Notes"],
+	#bodyContent #toc li a[href="#References"],
+	#bodyContent #toc li a[href="#Bibliography"],
+	#bodyContent #toc li a[href="#Further_reading"],
+	#bodyContent #toc li a[href="#Documentaries"],
+	#bodyContent #toc li a[href="#External_links"] {
+		margin: -3px 0 !important;
+		font-size: 14px !important;
+	}
+	#bodyContent #toc li a[href="#See_also"] .tocnumber,
+	#bodyContent #toc li a[href="#Notes"] .tocnumber,
+	#bodyContent #toc li a[href="#References"] .tocnumber,
+	#bodyContent #toc li a[href="#Bibliography"] .tocnumber,
+	#bodyContent #toc li a[href="#Further_reading"] .tocnumber,
+	#bodyContent #toc li a[href="#Documentaries"] .tocnumber,
+	#bodyContent #toc li a[href="#External_links"] .tocnumber {
+		display: none !important;
+	}
+	#bodyContent #toc li a {
+		display: block !important;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+	}
+	#bodyContent #toc li a:hover {
+		text-decoration: none !important;
+		color: #fff !important;
+	}
+	#toc ul li {
+		transition: background 0.2s ease-in-out !important;
+	}
+	#toc ul li:hover {
+		background: #565453 !important;
+	}
+	#toc #toctitle {
+		display: none !important;
+	}
+
+	/* footer */
+	#footer {
+		left: 0 !important;
+		right: 0 !important;
+		margin: 0 !important;
+		padding: 15px 0 !important;
+		background-color: #CAC8C4 !important;
+	}
+	#footer-info {
+		max-width: 860px !important;
+		margin: 0 auto !important;
+		font-size: 18px !important;
+	}
+	#footer li:not(#footer-info-lastmod) {
+		display: none !important;
+	}
+}
