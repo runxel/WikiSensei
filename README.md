@@ -15,5 +15,5 @@ To use this style you have to install [Stylus](https://add0n.com/stylus.html) an
 
 ## License
 
-Code released under the [CC BY-NC-SA](LICENSE) license.  
+Code released under the [CC BY-NC-SA](LICENSE.md) license.  
 Based on the work of [rotane](https://userstyles.org/styles/99515/wikipedia-1911-rotane)
