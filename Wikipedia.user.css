@@ -138,17 +138,15 @@
 	#mw-head a:visited {
 		color: #f1f4f5;
 	}
-	#mw-head #searchform > div {
-		position: absolute;
-		z-index: 8000;
-		top: -32px;
-		right: 0px;
-		margin-top: 13px;
-		margin-left: 15px;
-		border: none;
-		background: #E8E6E2;
-		width: 345px;
-		padding: 0 0 7px;
+	#mw-head #searchform #simpleSearch {
+		position: absolute !important;
+		z-index: 90 !important;
+		top: -19px !important;
+		right: 30px !important;
+		border: none !important;
+		background: #E8E6E2 !important;
+		height: auto !important;
+		border-radius: 2px !important;
 	}
 	#mw-head #searchform > div input#searchInput {
 		padding: 8px 0 6px 8px !important;
